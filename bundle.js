@@ -1,11 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-(function (process){
-require('dotenv').config({path: '/Users/nhudoan/Desktop/nhulam.com/.env'})
-console.log(require('dotenv').config())
-
-console.log(process.env)
-console.log(process.env.CLIENT_ID_AND_SECRET)
-console.log("fuck!")
+require('dotenv').config()
 
 var ACCESS_TOKEN = ""
 $.ajax({
@@ -28,33 +22,32 @@ $.ajax({
     }, 
     complete: function() {
         console.log(ACCESS_TOKEN)
+        $.ajax({
+            url: 'https://api.spotify.com/v1/me/player/recently-played',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", `Bearer ${ACCESS_TOKEN}`)
+            },
+            dataType:'json',
+            method:'GET', 
+            contentType: 'application/json', 
+            accepts: 'application/json', 
+            success: function(data){
+                const obj = JSON.parse(JSON.stringify(data)); 
+                console.log(obj["items"][0])
+                const song = obj["items"][0]["track"]["name"]
+                const artist = obj["items"][0]["track"]["artists"][0]["name"]
+                const date = new Date(obj["items"][0]["played_at"]).toLocaleDateString('en-US')
+                const time = new Date(obj["items"][0]["played_at"]).toLocaleTimeString('en-US')
+                document.getElementById("spotify-activity").innerHTML = `I was just listening to <i>${song}</i> by ${artist} on Spotify! (${date} at ${time})`
+            }, 
+            error: function(){
+            },
+        })
     }
 });
 
-/*
-$.ajax({
-    url: 'https://api.spotify.com/v1/me/player/recently-played',
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader("Authorization", `Bearer ${ACCESS_TOKEN}`)
-    },
-    dataType:'json',
-    method:'GET', 
-    contentType: 'application/json', 
-    accepts: 'application/json', 
-    success: function(data){
-        const obj = JSON.parse(JSON.stringify(data)); 
-        console.log(obj["items"][0])
-        const song = obj["items"][0]["track"]["name"]
-        const artist = obj["items"][0]["track"]["artists"][0]["name"]
-        const date = new Date(obj["items"][0]["played_at"]).toLocaleDateString('en-US')
-        const time = new Date(obj["items"][0]["played_at"]).toLocaleTimeString('en-US')
-        document.getElementById("spotify-activity").innerHTML = `I was just listening to <i>${song}</i> by ${artist} on Spotify! (${date} at ${time})`
-    }, 
-    error: function(){
-    },
-})*/
-}).call(this,require('_process'))
-},{"_process":5,"dotenv":2}],2:[function(require,module,exports){
+
+},{"dotenv":2}],2:[function(require,module,exports){
 (function (process){
 /* @flow */
 /*::
