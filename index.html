@@ -1,3 +1,30 @@
-Under construction, check back later!
-
-- N 
+<!DOCTYPE html>
+<html>
+    <body>
+        <div>I was just listening to <b><i id="song"></i></b> by <b id="artist"></b> on Spotify!</div>
+        <div>Last updated: <span id="updated"></span></div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>    
+        $.ajax({
+            url: 'https://api.spotify.com/v1/me/player/recently-played',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer BQAukd139K4o1gGIQaXHYcuPmN59XLuCEimtZbPbwX6aUhGXWFvEI6uqfmorTG_jH4CqDWmk3iZsdq3Q4kg2qcTSUzxDbg6IgCB9NETyuCIKhQdAT4NKwj7BO0Hj_iC2chTT-FEFaMUyCSVjR8GUJIoDQYhhRIB4hJyBSslmH9Db8Qlq4RAo_48m")
+            },
+            dataType:'json',
+            method:'GET', 
+            contentType: 'application/json', 
+            accepts: 'application/json', 
+            success: function(data){
+                const obj = JSON.parse(JSON.stringify(data)); 
+                console.log(obj["items"][0])
+                document.getElementById("song").innerHTML = obj["items"][0]["track"]["name"]
+                document.getElementById("artist").innerHTML = obj["items"][0]["track"]["artists"][0]["name"]
+                document.getElementById("updated").innerHTML = new Date(obj["items"][0]["played_at"]).toLocaleString('en-US')
+            }, 
+            error: function(){
+                console.log("no");
+            },
+        })
+    </script>
+</html>
