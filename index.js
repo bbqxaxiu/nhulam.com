@@ -13,14 +13,12 @@ $.ajax({
         refresh_token: "AQCBmurtgog_BQ8ORtgsQGo0qTtjATreDcFjhBdxrQoQZS6i5gvogFoPTXFH3dYz_TQnlEzBCDhEyYZOfiB4qf7QkgYFNPqo3pNYOUzvDUWlSIeHCllgQ4_Z76y-ucN1s-0"
     },
     success: function (data) {
-    console.log(data)
       const obj = JSON.parse(JSON.stringify(data)); 
       ACCESS_TOKEN = obj["access_token"]
     },
     error: function(){
     }, 
     complete: function() {
-        console.log(ACCESS_TOKEN)
         $.ajax({
             url: 'https://api.spotify.com/v1/me/player/recently-played',
             beforeSend: function(xhr) {
@@ -32,7 +30,6 @@ $.ajax({
             accepts: 'application/json', 
             success: function(data){
                 const obj = JSON.parse(JSON.stringify(data)); 
-                console.log(obj["items"][0])
                 const song = obj["items"][0]["track"]["name"]
                 const artist = obj["items"][0]["track"]["artists"][0]["name"]
                 const date = new Date(obj["items"][0]["played_at"]).toLocaleDateString('en-US')
