@@ -92,6 +92,11 @@ hr {
     padding: 0; 
 }
 
+.music-icon {
+    width: 1em; 
+    height: .7em; 
+}
+
 p.subtitle {
     font-style: italic;
     margin-top: 1rem;

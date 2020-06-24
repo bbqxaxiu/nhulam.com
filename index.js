@@ -1,4 +1,4 @@
-require('dotenv').config()
+console.log("hi")
 
 var ACCESS_TOKEN = ""
 $.ajax({
