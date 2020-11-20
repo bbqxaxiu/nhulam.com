@@ -56,6 +56,13 @@ body {
     counter-reset: sidenote-counter; 
 }
 
+@media only screen and (min-width: 768px) {
+    /* For mobile phones: */
+    h1 {
+        width: 16em;
+    }
+}
+
 h1 {
     font-weight: 400;
     margin-top: 4rem;
