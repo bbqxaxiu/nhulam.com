@@ -1,5 +1,3 @@
-console.log("hi")
-
 var ACCESS_TOKEN = ""
 $.ajax({
     url: "https://accounts.spotify.com/api/token",
