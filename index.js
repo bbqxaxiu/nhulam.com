@@ -2,19 +2,22 @@ var ACCESS_TOKEN = ""
 $.ajax({
     url: "https://accounts.spotify.com/api/token",
     beforeSend: function(xhr) { 
-      xhr.setRequestHeader("Authorization", `Basic MjU3OTBlZDkwNDk5NDk0Yzk1Yzk0NTZhNWIxMzYzNTA6YWI5ZmRlNjQwMWY5NDU4MGJlYzg5ZjQ2M2RhYTUyZTk=`); 
+      xhr.setRequestHeader("Authorization", `Basic NTMzZGU3ZjA4YzlmNGEyZTliYmM0NWMyNGE0MjFmNWU6ZmFmODAwYmYwMjM5NGZmYmIzYjY2ZGFiNWQ3N2EyMWQ=`); 
     },
     method: 'POST',
     dataType: 'json',
     data: {
         grant_type: "refresh_token",
-        refresh_token: "AQCBmurtgog_BQ8ORtgsQGo0qTtjATreDcFjhBdxrQoQZS6i5gvogFoPTXFH3dYz_TQnlEzBCDhEyYZOfiB4qf7QkgYFNPqo3pNYOUzvDUWlSIeHCllgQ4_Z76y-ucN1s-0"
+        refresh_token: "AQBVUV1btP0lyz9wba4ojdMZBdj4C2u8rjA6CRz3Hft_h41qlCH9znIDSoK3ml31lvhymzhE8wrXYCzblUsbKpmmi6wpizOseWJDHSyuyTVSweEV0Mj7faKLiQWxbN6aZw4"
     },
     success: function (data) {
+      console.log("NHUUU:)))");
       const obj = JSON.parse(JSON.stringify(data)); 
       ACCESS_TOKEN = obj["access_token"]
+      console.log(ACCESS_TOKEN)
     },
     error: function(){
+      console.log("NHUUU!!");
     }, 
     complete: function() {
         $.ajax({
