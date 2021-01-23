@@ -11,13 +11,10 @@ $.ajax({
         refresh_token: "AQBVUV1btP0lyz9wba4ojdMZBdj4C2u8rjA6CRz3Hft_h41qlCH9znIDSoK3ml31lvhymzhE8wrXYCzblUsbKpmmi6wpizOseWJDHSyuyTVSweEV0Mj7faKLiQWxbN6aZw4"
     },
     success: function (data) {
-      console.log("NHUUU:)))");
       const obj = JSON.parse(JSON.stringify(data)); 
       ACCESS_TOKEN = obj["access_token"]
-      console.log(ACCESS_TOKEN)
     },
     error: function(){
-      console.log("NHUUU!!");
     }, 
     complete: function() {
         $.ajax({
