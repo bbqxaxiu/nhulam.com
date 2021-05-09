@@ -1,3 +1,4 @@
+/* Start Spotify activity */
 var ACCESS_TOKEN = ""
 $.ajax({
     url: "https://accounts.spotify.com/api/token",
@@ -30,13 +31,14 @@ $.ajax({
                 const obj = JSON.parse(JSON.stringify(data)); 
                 const song = obj["items"][0]["track"]["name"]
                 const artist = obj["items"][0]["track"]["artists"][0]["name"]
-                const date = new Date(obj["items"][0]["played_at"]).toLocaleDateString('en-US')
-                const time = new Date(obj["items"][0]["played_at"]).toLocaleTimeString('en-US')
-                document.getElementById("spotify-activity").innerHTML = `I was just listening to <i>${song}</i> by ${artist} on Spotify! (${date} at ${time})`
+                // const date = new Date(obj["items"][0]["played_at"]).toLocaleDateString('en-US')
+                // const time = new Date(obj["items"][0]["played_at"]).toLocaleTimeString('en-US')
+                // document.getElementById("spotify-activity").innerHTML = `I was just listening to <i>${song}</i> by ${artist} on Spotify! (${date} at ${time})`
+                document.getElementById("spotify-activity").innerHTML = `I was just listening to <i>${song}</i> by ${artist} on Spotify!`
             }, 
             error: function(){
             },
         })
     }
 });
-
+/* End Spotify activity */
